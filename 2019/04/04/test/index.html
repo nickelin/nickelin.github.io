@@ -1,22 +1,20 @@
-doctype html
-html
-	include partial/head.jade
-	body
+extends partial/layout
 
-		#postContainer
-			#postTop
-				h4#logo #{theme.logo}
-				br
-				br
-				h2#postTitle #{page.title}
-				br
-				span.postTime(class='fa fa-calendar' aria-hidden='true') #{date(page.date['_i'],'YYYY-M-D')}
-				each tag in page.tags.data
-					span.postTags(class='fa fa-tags'  aria-hidden='true') &nbsp;#{tag.name}
-				br
-				br
-			-str = markdown(page.content)
-			section#articleDiv!= str
-		script(src='/js/jquery.min.js')
-		script(src='/js/highlight.min.js')
-		script(src='/js/start.js')
+block site_title
+    != page.title + " · " + config.title
+
+block description
+    - var desc = page.desc || page.title + ' - ' + config.author;
+    meta(name="description", content=desc)
+
+block container
+    include mixins/post
+    +post(page)
+
+block pagination
+    include mixins/paginator
+    +post()
+    include partial/comment
+
+block copyright
+    include partial/copyright
