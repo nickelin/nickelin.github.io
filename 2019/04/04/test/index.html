@@ -415,6 +415,19 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/hexo/2019/04/04/test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/hexo/2019/04/04/test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -504,7 +517,10 @@
           
 
   
-    <div class="comments" id="gitalk-container">
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
     </div>
 
   
@@ -765,32 +781,37 @@
 
 
   
-    
+    <!-- LOCAL: You can save these files to your site and update links -->
 
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitmint.browser.js"></script>
 
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css">
+<!-- END LOCAL -->
 
 <script>
-  var gitalk = new Gitalk({
-    clientID: '9e81e4c387928c2deeda',
-    clientSecret: 'cfa49a3f9eecfd897de82e555f30235307043ff5',
-    repo: 'https://github.com/nickelin/nicketalk.git',
-    owner: 'nickelin',
-    admin: ['nickelin'],
-    id: md5(location.pathname),
-    
-      language: window.navigator.language || window.navigator.userLanguage,
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
+  function renderGitment() {
+    var gitment = new Gitmint({
+      id: window.location.pathname,
+      owner: 'nickelin',
+      repo: 'https://github.com/nickelin/nicketalk.git',
+      
+        lang: '' || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+      
+      oauth: {
+      
+      
+        client_secret: 'cfa49a3f9eecfd897de82e555f30235307043ff5',
+      
+        client_id: '9e81e4c387928c2deeda'
+      }
+    });
+    gitment.render('gitment-container');
+  }
+
+  
+    renderGitment();
+  
 </script>
 
   
